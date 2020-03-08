@@ -1,0 +1,4 @@
+/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug

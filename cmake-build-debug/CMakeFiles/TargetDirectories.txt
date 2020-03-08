@@ -1,0 +1,4 @@
+/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles/cuda_base.dir
+/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles/CUDA_Test_Clion.dir

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcuda_base.a  CMakeFiles/cuda_base.dir/main_solve.cu.o
+/usr/bin/ranlib libcuda_base.a

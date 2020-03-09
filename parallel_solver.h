@@ -9,9 +9,10 @@
 
 __device__ int getL(int d, int i, int j);
 __device__ int getD(int i);
+__device__ void reduce_sum(float* T, int size);
 __device__ void solve_tinf(float* T, float* Y, int d);
 __device__ void solve_tsup(float* T, float* Y, int d);
-__device__ void prod_diag_trig(float * D, float* T, int d);
+__device__ void invert_diag(float * D, float* Y, int d);
 __device__ void solve_system(float* D, float* T, float* Y, int d);
 __global__ void solve_batch(int N, int d, float* T, float* Y);
 

@@ -16,5 +16,7 @@ print("Lt:\n", Lt)
 print("D:", D)
 print("Y:", Y)
 
-print(f"True X: {np.dot(np.linalg.inv(np.dot(L, Lt)), Y)}")
+D = np.diagflat(D)
+
+print(f"True X: {np.dot(np.linalg.inv(Lt), Y)}")
 print(f"X: {Xchap}")

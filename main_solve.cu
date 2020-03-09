@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <ctime>
 
 #include "ide_params.h"
 #include "parallel_solver.h"
@@ -15,7 +16,7 @@ int hgetL(int d, int i, int j) {
         j = t;
     }
 
-    int l_position = i * (i - 1) / 2 + j;
+    int l_position = i * (i - 1) / 2 + j-1;
 
     return l_position;
 }
@@ -34,24 +35,24 @@ void generate_systems(float *A, float *Y, int N, int d, bool verbose=true) {
 
 
         for (int j = 0; j < (d * (d + 1) / 2); j++)
-            T[j] = ((float) (1));
+            T[j] = ((float) (1+rand()%2));
 
 
-        for (int j = 0; j<d; j++)
+        for (int j = 1; j<=d; j++)
             T[hgetL(d, j,j)] = 1.0f;
 
         for (int j = 0; j < d; j++) {
-            D[j] = (float) 1;
-            Y[matrix_size * i + j] = ((float) (1));
+            D[j] = (float) (1+rand()%5);
+            Y[matrix_size * i + j] = ((float) (1+rand()%2));
         }
 
         if (verbose)
         {
             printf("[");
-            for(int k = 0; k<d; k++)
+            for(int k = 1; k<=d; k++)
             {
                 printf("[");
-                for(int j = 0; j<d; j++)
+                for(int j = 1; j<=d; j++)
                 {
                     if (j <= k)
                         printf("%f,", T[hgetL(d, j, k)]);
@@ -74,10 +75,6 @@ void generate_systems(float *A, float *Y, int N, int d, bool verbose=true) {
         printf("]\n");
 
     }
-
-
-
-
 }
 
 void matrix_product(float *D, float *T, float *X, float *Y, int d) {
@@ -103,8 +100,10 @@ void matrix_product(float *D, float *T, float *X, float *Y, int d) {
 }
 
 int main(int argc, char *argv[]) {
-    int d = 3;
+    int d = 11;
     int n = 1;
+
+    srand(time(0));
 
     auto *A = (float *) malloc(sizeof(float) * n * (d + d * (d + 1) / 2));
     auto *Y = (float *) malloc(sizeof(float) * n * d);
@@ -123,7 +122,7 @@ int main(int argc, char *argv[]) {
     cudaMemcpy(gpuA, A, sizeof(float) * n * (d + d * (d + 1) / 2), cudaMemcpyHostToDevice);
     cudaMemcpy(gpuY, Y, sizeof(float) * n * d, cudaMemcpyHostToDevice);
 
-    solve_batch << < n, d >> > (n, d, gpuA, gpuY);
+    solve_batch << < n, d, n*d* sizeof(float) >> > (n, d, gpuA, gpuY);
 
     cudaDeviceSynchronize();
 

@@ -53,7 +53,7 @@ A = A.reshape((n,d,d))
 
 # factorisation :
 if D is not None and L is not None:
-    D = np.diag(D).reshape((n,d,d))
+    D = np.stack([np.diag(m) for m in np.array(D).reshape((n,d))], axis=0)
     L = np.array(L).reshape((n,d,d))
     for i in range(n):
         LDLt = np.linalg.multi_dot([L[i], D[i], L[i].T])

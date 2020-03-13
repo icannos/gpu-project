@@ -272,16 +272,21 @@ int main() {
     // printf("]\n");
     // printf("\0");
 
+    int A_size = d + d * (d + 1) / 2;
     printf("{\n");
     // print A
     printf("'A':[");
-    for(int i = 0; i<d; i++){
+    for (int midx=0; midx<n; midx++){
       printf("[");
-      for(int j = 0; j<d; j++){
-        if(i==j)
-          printf("%f,",A[hgetD(i)]);
-        else
-          printf("%f,",A[d+hgetL(d,i,j)]);
+      for(int i = 0; i<d; i++){
+        printf("[");
+        for(int j = 0; j<d; j++){
+          if(i==j)
+            printf("%f,",A[midx*A_size+hgetD(i)]);
+          else
+            printf("%f,",A[midx*A_size+d+hgetL(d,i,j)]);
+        }
+        printf("],");
       }
       printf("],");
     }
@@ -290,13 +295,17 @@ int main() {
 
     // print L
     printf("'L':[");
-    for(int i = 0; i<d; i++){
+    for (int midx=0; midx<n; midx++){
       printf("[");
-      for(int j = 0; j<d; j++){
-        if(j>i)
-          printf("%f,",0.0f);
-        else
-          printf("%f,",LandD[d+hgetL(d,i,j)]);
+      for(int i = 0; i<d; i++){
+        printf("[");
+        for(int j = 0; j<d; j++){
+          if(j>i)
+            printf("%f,",0.0f);
+          else
+            printf("%f,",LandD[midx*A_size+d+hgetL(d,i,j)]);
+        }
+        printf("],");
       }
       printf("],");
     }
@@ -305,15 +314,23 @@ int main() {
 
     // print D
     printf("'D':[");
-    for(int i = 0; i<d; i++)
-      printf("%f,",LandD[hgetD(i)]);
+    for (int midx=0; midx<n; midx++){
+      printf("[");
+      for(int i = 0; i<d; i++)
+        printf("%f,",LandD[midx*A_size+hgetD(i)]);
+      printf("],");
+    }
     printf("],\n");
     // printf("\0");
 
     // print ones
     printf("'ones':[");
-    for(int i = 0; i<d; i++)
-      printf("%f,",A[d+hgetL(d, i, i)]);
+    for (int midx=0; midx<n; midx++){
+      printf("[");
+      for(int i = 0; i<d; i++)
+        printf("%f,",A[midx*A_size+d+hgetL(d, i, i)]);
+      printf("],");
+    }
     printf("],\n");
     // printf("\0");
 

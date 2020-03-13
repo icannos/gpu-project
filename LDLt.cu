@@ -124,13 +124,13 @@ __global__ void LDLt_max_col_k(float* sA, int d)
   // //copy ACPU to sA
   // parallel_copy(sA, &AGPU[(blockIdx.x*minTB + Qt)*A_size], minTB*A_size);
 
-
+  // tidx==i
 
   // Perform the LDLt factorization
   int j, k;
-  for(j=0; j<d; j++){ // i  == j in paper
+  for(j=0; j<d; j++){
     // D_j,j :
-    if(tidx==0){ // tidx==i
+    if(tidx==0){
       for(k=0; k<j; k++){
         sA[nt+getD(d, j)] -= sA[nt+getD(d,k)]*
           sA[nt+getL(d,j,k)]*
@@ -157,6 +157,54 @@ __global__ void LDLt_max_col_k(float* sA, int d)
 
 }
 
+// __global__ void LDLt_max_row_k(float* AGPU, int d)
+__global__ void LDLt_max_row_k(float* sA, int d)
+{
+  int tidx = threadIdx.x%d;
+  int Qt = (threadIdx.x-tidx)/d;
+  int A_size = d*(d+1)/2+d;
+  int minTB = blockDim.x/d;
+  // printf("minTB %d\n", minTB);
+  int nt = (blockIdx.x*minTB + Qt) * A_size;
+  // int gbx = Qt + blockIdx.x*(blockDim.x/d);
+
+
+  // extern __shared__ float sA[];
+  // //copy ACPU to sA
+  // parallel_copy(sA, &AGPU[(blockIdx.x*minTB + Qt)*A_size], minTB*A_size);
+
+  // tidx==j
+
+  // Perform the LDLt factorization
+  int i, k;
+  for(i=0; i<d; i++){
+    // D_i,i :
+    if(tidx==0){
+      for(k=0; k<i; k++){
+        sA[nt+getD(d, i)] -= sA[nt+getD(d,k)]*
+          sA[nt+getL(d,i,k)]*
+          sA[nt+getL(d,i,k)];
+      }
+    }
+    __syncthreads();
+
+    // L_i,: parallel
+    if(i<tidx){
+      printf("(%d,%d,%d,%d),", nt+getL(d,i,tidx), nt, i,tidx);
+      sA[nt+getL(d,i,tidx)] /= sA[nt+getD(d,i)];
+      for(k=0; k<i; k++){
+        sA[nt+getL(d,i,tidx)] -= sA[nt+getL(d,k,tidx)]*
+          sA[nt+getL(d,k,i)]*
+          sA[nt+getD(d,k)]/
+          sA[nt+getD(d,i)];
+      }
+    }
+    __syncthreads();
+  }
+
+  // parallel_copy(&AGPU[(blockIdx.x*minTB + Qt)*A_size], sA, minTB*A_size);
+
+}
 
 
 
@@ -199,7 +247,8 @@ int main() {
     cudaEventCreate(&stop);                 // GPU timer instructions
     cudaEventRecord(start, 0);              // GPU timer instructions
 
-    LDLt_max_col_k <<< NB, d * minTB, minTB * ((d * d + d) / 2 + d) * sizeof(float) >>> (gpuA, d);
+    // LDLt_max_col_k <<< NB, d * minTB, minTB * ((d * d + d) / 2 + d) * sizeof(float) >>> (gpuA, d);
+    LDLt_max_row_k <<< NB, d * minTB, minTB * ((d * d + d) / 2 + d) * sizeof(float) >>> (gpuA, d);
     cudaDeviceSynchronize();
 
     cudaEventRecord(stop, 0);               // GPU timer instructions

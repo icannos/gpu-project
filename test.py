@@ -18,5 +18,5 @@ print("Y:", Y)
 
 D = np.diagflat(D)
 
-print(f"True X: {np.dot(np.linalg.inv(Lt), Y)}")
+print(f"True X: {np.dot(np.linalg.inv(L@D@Lt), Y)}")
 print(f"X: {Xchap}")

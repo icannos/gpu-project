@@ -1,4 +1,16 @@
 /bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project
+-- The CXX compiler identification is GNU 9.2.1
+-- The CUDA compiler identification is NVIDIA 10.2.89
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working CUDA compiler: /opt/cuda/bin/nvcc
+-- Check for working CUDA compiler: /opt/cuda/bin/nvcc -- works
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug

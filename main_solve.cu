@@ -103,6 +103,8 @@ int main(int argc, char *argv[]) {
     int d = 11;
     int n = 1;
 
+    int thread_number = 5;
+
     srand(time(0));
 
     auto *A = (float *) malloc(sizeof(float) * n * (d + d * (d + 1) / 2));
@@ -122,7 +124,7 @@ int main(int argc, char *argv[]) {
     cudaMemcpy(gpuA, A, sizeof(float) * n * (d + d * (d + 1) / 2), cudaMemcpyHostToDevice);
     cudaMemcpy(gpuY, Y, sizeof(float) * n * d, cudaMemcpyHostToDevice);
 
-    solve_batch << < n, d, n*d* sizeof(float) >> > (n, d, gpuA, gpuY);
+    solve_batch << < n, thread_number, thread_number* sizeof(float) >> > (n, d, gpuA, gpuY);
 
     cudaDeviceSynchronize();
 

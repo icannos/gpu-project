@@ -1,5 +1,11 @@
 ### GPU project -- LDLT factorization
 
+#### Usages
+```
+./build/solve d max_number_of_thread
+./build/solve_benchmark number_of_matrices number_of_matrices d max_number_of_thread
+
+```
 
 #### Structure du projet
 '''

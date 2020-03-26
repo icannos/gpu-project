@@ -187,9 +187,9 @@ __device__ void invert_diag(float *D, float *Y, int d) {
 }
 
 __device__ void solve_system(float *D, float *T, float *Y, int d) {
-    //solve_tinf(T, Y, d);
+    solve_tinf(T, Y, d);
     invert_diag(D, Y, d);
-    //solve_tsup(T, Y, d);
+    solve_tsup(T, Y, d);
 }
 
 __global__ void solve_batch(int N, int d, float *T, float *Y) {

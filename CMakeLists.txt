@@ -17,8 +17,11 @@ set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode arch=compute_50,code=sm_50")
 
 add_executable(CUDA_Test_Clion
         main_solve.cu
+        benchmark.cu
         parallel_solver.cu
         parallel_solver.h
+        LDLt.cu
+        LDLt.h
         )
 
 set_target_properties(

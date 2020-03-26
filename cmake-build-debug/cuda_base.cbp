@@ -126,6 +126,15 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/LDLt.cu">
+			<Option target="CUDA_Test_Clion"/>
+		</Unit>
+		<Unit filename="/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/LDLt.h">
+			<Option target="CUDA_Test_Clion"/>
+		</Unit>
+		<Unit filename="/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/benchmark.cu">
+			<Option target="CUDA_Test_Clion"/>
+		</Unit>
 		<Unit filename="/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/main_solve.cu">
 			<Option target="cuda_base"/>
 			<Option target="CUDA_Test_Clion"/>

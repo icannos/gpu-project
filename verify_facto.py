@@ -2,7 +2,7 @@
 usage :
 
 $ nvcc LDLt.cu utils.cu -o LDLt
-$ ./LDLt | python test2.py --atol 1e-4
+$ ./LDLt | python verify_facto.py --atol 1e-4
 
 '''
 import numpy as np

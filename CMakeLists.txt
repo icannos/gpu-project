@@ -5,7 +5,7 @@ project(cuda_base CXX CUDA)
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(cuda_base
-        main_solve.cu)
+        benchmark_solve.cu)
 
 target_compile_features(cuda_base PUBLIC cxx_std_11)
 set_target_properties( cuda_base
@@ -16,9 +16,12 @@ set_target_properties( cuda_base
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode arch=compute_50,code=sm_50")
 
 add_executable(CUDA_Test_Clion
-        main_solve.cu
+        benchmark_solve.cu
+        benchmark.cu
         parallel_solver.cu
         parallel_solver.h
+        LDLt.cu
+        LDLt.h
         )
 
 set_target_properties(

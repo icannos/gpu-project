@@ -87,6 +87,10 @@ int main(int argc, char *argv[]) {
 
     int thread_number = 1024;
 
+    n = atoi(argv[1]);
+    d = atoi(argv[2]);
+    thread_number = atoi(argv[3]);
+
     srand(time(0));
 
     auto *A = (float *) malloc(sizeof(float) * n * (d + d * (d + 1) / 2));
@@ -119,7 +123,7 @@ int main(int argc, char *argv[]) {
     cudaEventElapsedTime(&Tim, start, stop);// GPU timer instructions
     cudaEventDestroy(start);                // GPU timer instructions
     cudaEventDestroy(stop);                 // GPU timer instructions
-    printf("\nSolving time %f ms\n", Tim);  // GPU timer instructions
+    printf("Solving time %f ms\n", Tim);  // GPU timer instructions
 
     cudaMemcpy(X, gpuY, sizeof(float) * n * d, cudaMemcpyDeviceToHost);
 

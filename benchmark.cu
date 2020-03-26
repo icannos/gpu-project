@@ -2,6 +2,11 @@
 // Created by maxime on 26/03/20.
 //
 
+
+
+// Usage
+// ./build/full N d
+
 #include "LDLt.h"
 #include "parallel_solver.h"
 

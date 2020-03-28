@@ -24,11 +24,13 @@ int main(int argc, char* argv[]) {
     int d = 20;
     int n = 5;
     int num_thread_per_block = 1024;
+    int factorizer = 0; // 0: columns || 1: rows || 2: shared memory+row
 
     n = atoi(argv[1]);
     d = atoi(argv[2]);
     num_thread_per_block = atoi(argv[3]);
-
+    if (argc>4)
+      factorizer = atoi(argv[4]);
 
     // int minTB = 1;  // number of matrix per block
     int minTB = num_thread_per_block/d;  // number of matrix per block
@@ -62,7 +64,14 @@ int main(int argc, char* argv[]) {
 
     // LDLt_max_col_k <<< NB, d * minTB, minTB * ((d * d + d) / 2 + d) * sizeof(float) >>> (gpuA, d);
     // LDLt_max_row_k <<< NB, d * minTB, minTB * ((d * d + d) / 2 + d) * sizeof(float) >>> (gpuA, d);
-    LDLt_max_row_k <<< NB, d * minTB, 0 >>> (gpuA, d);
+    if (factorizer==0)
+        LDLt_max_col_k <<< NB, d * minTB, 0 >>> (gpuA, d);
+    else if (factorizer==1)
+        LDLt_max_row_k <<< NB, d * minTB, 0 >>> (gpuA, d);
+    else if (factorizer==2)
+        LDLt_max_row_k_SHARED <<< NB, d * minTB, minTB * ((d * d + d) / 2 + d) * sizeof(float) >>> (gpuA, d);
+    else
+        throw std::invalid_argument( "unknown factorizer" );
     cudaDeviceSynchronize();
 
     cudaEventRecord(stop, 0);               // GPU timer instructions

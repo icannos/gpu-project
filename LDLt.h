@@ -13,6 +13,6 @@ __device__ int getDPierre(int d, int i);
 __device__ void parallel_copy(float* dest, float* src, int n);
 __global__ void LDLt_max_col_k(float* sA, int d);
 __global__ void LDLt_max_row_k(float* sA, int d);
+__global__ void LDLt_max_row_k_SHARED(float* sA, int d);
 
 #endif //CUDA_BASE_LDLT_CU_H
-

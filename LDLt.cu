@@ -147,6 +147,51 @@ __global__ void LDLt_max_row_k(float* sA, int d)
     // extern __shared__ float sA[];
     // //copy ACPU to sA
     // parallel_copy(sA, &AGPU[(blockIdx.x*minTB + Qt)*A_size], minTB*A_size);
+    // Perform the LDLt factorization
+    int i, k;
+    for(i=0; i<d; i++){
+        // D_i,i :
+        if(tidx==0){
+            for(k=0; k<i; k++){
+                sA[nt+getDPierre(d, i)] -= sA[nt+getDPierre(d,k)]*
+                                     sA[nt+getLPierre(d,i,k)]*
+                                     sA[nt+getLPierre(d,i,k)];
+            }
+        }
+        __syncthreads();
+
+        // L_i,: parallel
+        if(i<tidx){
+            //printf("(%d,%d,%d,%d),", nt+getLPierre(d,i,tidx), nt, i,tidx);
+            sA[nt+getLPierre(d,i,tidx)] /= sA[nt+getDPierre(d,i)];
+            for(k=0; k<i; k++){
+                sA[nt+getLPierre(d,i,tidx)] -= sA[nt+getLPierre(d,k,tidx)]*
+                                         sA[nt+getLPierre(d,k,i)]*
+                                         sA[nt+getDPierre(d,k)]/
+                                         sA[nt+getDPierre(d,i)];
+            }
+        }
+        __syncthreads();
+    }
+
+    // parallel_copy(&sA[(blockIdx.x*minTB + Qt)*A_size], A_host, minTB*A_size);
+}
+
+// __global__ void LDLt_max_row_k(float* AGPU, int d)
+__global__ void LDLt_max_row_k_SHARED(float* A_host, int d)
+{
+    int tidx = threadIdx.x%d;
+    int Qt = (threadIdx.x-tidx)/d;
+    int A_size = d*(d+1)/2+d;
+    int minTB = blockDim.x/d;
+    // printf("minTB %d\n", minTB);
+    int nt = (blockIdx.x*minTB + Qt) * A_size;
+    // int gbx = Qt + blockIdx.x*(blockDim.x/d);
+
+    printf("\n thread %d block %d minTB %d", threadIdx.x, blockIdx.x, minTB);
+    extern __shared__ float sA[];
+    //copy ACPU to sA
+    parallel_copy(A_host, &sA[(blockIdx.x*minTB + Qt)*A_size], minTB*A_size);
 
     // tidx==j
 
@@ -177,10 +222,8 @@ __global__ void LDLt_max_row_k(float* sA, int d)
         __syncthreads();
     }
 
-    // parallel_copy(&AGPU[(blockIdx.x*minTB + Qt)*A_size], sA, minTB*A_size);
-
+    parallel_copy(&sA[(blockIdx.x*minTB + Qt)*A_size], A_host, minTB*A_size);
 }
-
 
 
 // ************************************************************************ //

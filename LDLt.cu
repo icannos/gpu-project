@@ -5,7 +5,7 @@
 #include <cstring>
 #include <ctime>
 
-int hgetL(int d, int i, int j) {
+int hgetLPierre(int d, int i, int j) {
     // If j > i, then we take the transpose of L
     if (j > i) {
         int t = i;
@@ -19,7 +19,7 @@ int hgetL(int d, int i, int j) {
     return l_position;
 }
 
-int hgetD(int i) {
+int hgetDPierre(int i) {
     int d_position = i;
     return d_position;
 }
@@ -33,15 +33,15 @@ void generate_systems(float *A, float *Y, int N, int d, bool verbose=true) {
 
 
         for (int j=0; j < (d * (d + 1) / 2); j++)
-            T[j] = ((float) (1+rand()%2));
+            T[j] = ((float) rand()+1)*1./RAND_MAX;
 
 
         for (int j=0; j<d; j++)
-            T[hgetL(d, j,j)] = 1.0f;
+            T[hgetLPierre(d, j,j)] = 1.0f;
 
         for (int j=0; j<d; j++) {
-            D[j] = (float) (1+rand()%5);
-            Y[d * i + j] = ((float) (1+rand()%2));
+            D[j] = ((float) rand()+1)*1./RAND_MAX;
+            Y[d * i + j] = ((float) rand()+1)*1./RAND_MAX;
         }
 
     }
@@ -49,8 +49,8 @@ void generate_systems(float *A, float *Y, int N, int d, bool verbose=true) {
 
 // ************************************************************************ //
 
-// __device__ int getL(float* T, int n, int d, int matrix_id, int i, int j)
-__device__ int getL(int d, int i, int j)
+// __device__ int getLPierre(float* T, int n, int d, int matrix_id, int i, int j)
+__device__ int getLPierre(int d, int i, int j)
 {
     // If j > i, then we take the transpose of L
     if (j > i) {int t = i; i = j; j = t;};
@@ -63,8 +63,8 @@ __device__ int getL(int d, int i, int j)
     // return &T[matrix_id * matrix_memory_size + l_position]
 }
 
-// __device__ int getD(float* T, int n, int d, int matrix_id, int i)
-__device__ int getD(int d, int i)
+// __device__ int getDPierre(float* T, int n, int d, int matrix_id, int i)
+__device__ int getDPierre(int d, int i)
 {
     // int matrix_memory_size = (d+d*(d+1)/2);
     int d_position = i;
@@ -107,22 +107,22 @@ __global__ void LDLt_max_col_k(float* sA, int d)
         // D_j,j :
         if(tidx==0){
             for(k=0; k<j; k++){
-                sA[nt+getD(d, j)] -= sA[nt+getD(d,k)]*
-                                     sA[nt+getL(d,j,k)]*
-                                     sA[nt+getL(d,j,k)];
+                sA[nt+getDPierre(d, j)] -= sA[nt+getDPierre(d,k)]*
+                                     sA[nt+getLPierre(d,j,k)]*
+                                     sA[nt+getLPierre(d,j,k)];
             }
         }
         __syncthreads();
 
         // L_:,j parallel
         if(tidx>j){
-            //printf("(%d,%d,%d,%d),", nt+getL(d,tidx,j), nt, tidx, j);
-            sA[nt+getL(d,tidx,j)] /= sA[nt+getD(d,j)];
+            //printf("(%d,%d,%d,%d),", nt+getLPierre(d,tidx,j), nt, tidx, j);
+            sA[nt+getLPierre(d,tidx,j)] /= sA[nt+getDPierre(d,j)];
             for(k=0; k<j; k++){
-                sA[nt+getL(d,tidx,j)] -= sA[nt+getL(d,tidx,k)]*
-                                         sA[nt+getL(d,j,k)]*
-                                         sA[nt+getD(d,k)]/
-                                         sA[nt+getD(d,j)];
+                sA[nt+getLPierre(d,tidx,j)] -= sA[nt+getLPierre(d,tidx,k)]*
+                                         sA[nt+getLPierre(d,j,k)]*
+                                         sA[nt+getDPierre(d,k)]/
+                                         sA[nt+getDPierre(d,j)];
             }
         }
         __syncthreads();
@@ -156,22 +156,22 @@ __global__ void LDLt_max_row_k(float* sA, int d)
         // D_i,i :
         if(tidx==0){
             for(k=0; k<i; k++){
-                sA[nt+getD(d, i)] -= sA[nt+getD(d,k)]*
-                                     sA[nt+getL(d,i,k)]*
-                                     sA[nt+getL(d,i,k)];
+                sA[nt+getDPierre(d, i)] -= sA[nt+getDPierre(d,k)]*
+                                     sA[nt+getLPierre(d,i,k)]*
+                                     sA[nt+getLPierre(d,i,k)];
             }
         }
         __syncthreads();
 
         // L_i,: parallel
         if(i<tidx){
-            //printf("(%d,%d,%d,%d),", nt+getL(d,i,tidx), nt, i,tidx);
-            sA[nt+getL(d,i,tidx)] /= sA[nt+getD(d,i)];
+            //printf("(%d,%d,%d,%d),", nt+getLPierre(d,i,tidx), nt, i,tidx);
+            sA[nt+getLPierre(d,i,tidx)] /= sA[nt+getDPierre(d,i)];
             for(k=0; k<i; k++){
-                sA[nt+getL(d,i,tidx)] -= sA[nt+getL(d,k,tidx)]*
-                                         sA[nt+getL(d,k,i)]*
-                                         sA[nt+getD(d,k)]/
-                                         sA[nt+getD(d,i)];
+                sA[nt+getLPierre(d,i,tidx)] -= sA[nt+getLPierre(d,k,tidx)]*
+                                         sA[nt+getLPierre(d,k,i)]*
+                                         sA[nt+getDPierre(d,k)]/
+                                         sA[nt+getDPierre(d,i)];
             }
         }
         __syncthreads();

@@ -4,6 +4,7 @@
 ```
 ./build/solve d max_number_of_thread
 ./build/solve_benchmark number_of_matrices number_of_matrices d max_number_of_thread
+./build/fact number_of_matrices d max_number_of_thread | python verify_facto.py --atol 1e-2
 
 ```
 
@@ -14,6 +15,7 @@
 │   ├── full			// Factorize and solve
 │   ├── solve			// Solve the system
 │   ├── solve_benchmark		// Solve the systems for benchmarking
+│   ├── fact		  // Factorize
 │   └── test
 ├── benchmark.cu		// Used to make a benchmark of the factorization and the solver
 ├── benchmark.py		// Pyton script which run multiple time the benchmark to make a csv file

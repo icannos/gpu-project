@@ -74,17 +74,17 @@ include CMakeFiles/CUDA_Test_Clion.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CUDA_Test_Clion.dir/flags.make
 
-CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o: CMakeFiles/CUDA_Test_Clion.dir/flags.make
-CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o: ../main_solve.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o"
-	/opt/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -dc /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/main_solve.cu -o CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o
+CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o: CMakeFiles/CUDA_Test_Clion.dir/flags.make
+CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o: ../benchmark_solve.cu
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o"
+	/opt/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -dc /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/benchmark_solve.cu -o CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o
 
-CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.i"
+CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.s"
+CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
 CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.o: CMakeFiles/CUDA_Test_Clion.dir/flags.make
@@ -128,7 +128,7 @@ CMakeFiles/CUDA_Test_Clion.dir/LDLt.cu.s: cmake_force
 
 # Object files for target CUDA_Test_Clion
 CUDA_Test_Clion_OBJECTS = \
-"CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o" \
+"CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o" \
 "CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.o" \
 "CMakeFiles/CUDA_Test_Clion.dir/parallel_solver.cu.o" \
 "CMakeFiles/CUDA_Test_Clion.dir/LDLt.cu.o"
@@ -136,7 +136,7 @@ CUDA_Test_Clion_OBJECTS = \
 # External object files for target CUDA_Test_Clion
 CUDA_Test_Clion_EXTERNAL_OBJECTS =
 
-CMakeFiles/CUDA_Test_Clion.dir/cmake_device_link.o: CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o
+CMakeFiles/CUDA_Test_Clion.dir/cmake_device_link.o: CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o
 CMakeFiles/CUDA_Test_Clion.dir/cmake_device_link.o: CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.o
 CMakeFiles/CUDA_Test_Clion.dir/cmake_device_link.o: CMakeFiles/CUDA_Test_Clion.dir/parallel_solver.cu.o
 CMakeFiles/CUDA_Test_Clion.dir/cmake_device_link.o: CMakeFiles/CUDA_Test_Clion.dir/LDLt.cu.o
@@ -153,7 +153,7 @@ CMakeFiles/CUDA_Test_Clion.dir/build: CMakeFiles/CUDA_Test_Clion.dir/cmake_devic
 
 # Object files for target CUDA_Test_Clion
 CUDA_Test_Clion_OBJECTS = \
-"CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o" \
+"CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o" \
 "CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.o" \
 "CMakeFiles/CUDA_Test_Clion.dir/parallel_solver.cu.o" \
 "CMakeFiles/CUDA_Test_Clion.dir/LDLt.cu.o"
@@ -161,7 +161,7 @@ CUDA_Test_Clion_OBJECTS = \
 # External object files for target CUDA_Test_Clion
 CUDA_Test_Clion_EXTERNAL_OBJECTS =
 
-CUDA_Test_Clion: CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o
+CUDA_Test_Clion: CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o
 CUDA_Test_Clion: CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.o
 CUDA_Test_Clion: CMakeFiles/CUDA_Test_Clion.dir/parallel_solver.cu.o
 CUDA_Test_Clion: CMakeFiles/CUDA_Test_Clion.dir/LDLt.cu.o

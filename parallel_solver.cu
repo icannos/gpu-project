@@ -125,8 +125,9 @@ __device__ void solve_tinf(float *T, float *Y, int d) {
 __device__ void solve_tsup(float *T, float *Y, int d) {
     // Solve an equation of the form LZ = Y
     // T represents the sup triangular matrix
-    // The results is then stored in Z
+    // The results is then stored in Y
 
+    // Same method than the previous, just we go bottom up instead
     extern __shared__ float tmp[];
 
     int blockdim = blockDim.x;
@@ -173,6 +174,9 @@ __device__ void solve_tsup(float *T, float *Y, int d) {
 }
 
 __device__ void invert_diag(float *D, float *Y, int d) {
+    // Invert a diagonal matrix in parallel
+    // It is just each element 1/x
+
     int q = d / blockDim.x;
     int rmd = d % blockDim.x;
 
@@ -186,12 +190,15 @@ __device__ void invert_diag(float *D, float *Y, int d) {
 
 }
 
+// Solve a system in the LDLt form
+// The result is stored into Y
 __device__ void solve_system(float *D, float *T, float *Y, int d) {
     solve_tinf(T, Y, d);
     invert_diag(D, Y, d);
     solve_tsup(T, Y, d);
 }
 
+// Encapsulation of the solver, each block take care of one matrix
 __global__ void solve_batch(int N, int d, float *T, float *Y) {
     int matrix_size = d + d * (d + 1) / 2;
     solve_system(&T[matrix_size * blockIdx.x], &T[matrix_size * blockIdx.x + d], &Y[d * blockIdx.x], d);

@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/CUDA_Test_Clion.dir/LDLt.cu.o"
   "CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.o"
+  "CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o"
   "CMakeFiles/CUDA_Test_Clion.dir/cmake_device_link.o"
-  "CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o"
   "CMakeFiles/CUDA_Test_Clion.dir/parallel_solver.cu.o"
   "CUDA_Test_Clion"
   "CUDA_Test_Clion.pdb"

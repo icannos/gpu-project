@@ -74,27 +74,27 @@ include CMakeFiles/cuda_base.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/cuda_base.dir/flags.make
 
-CMakeFiles/cuda_base.dir/main_solve.cu.o: CMakeFiles/cuda_base.dir/flags.make
-CMakeFiles/cuda_base.dir/main_solve.cu.o: ../main_solve.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/cuda_base.dir/main_solve.cu.o"
-	/opt/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -dc /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/main_solve.cu -o CMakeFiles/cuda_base.dir/main_solve.cu.o
+CMakeFiles/cuda_base.dir/benchmark_solve.cu.o: CMakeFiles/cuda_base.dir/flags.make
+CMakeFiles/cuda_base.dir/benchmark_solve.cu.o: ../benchmark_solve.cu
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CUDA object CMakeFiles/cuda_base.dir/benchmark_solve.cu.o"
+	/opt/cuda/bin/nvcc -forward-unknown-to-host-compiler $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -dc /run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/benchmark_solve.cu -o CMakeFiles/cuda_base.dir/benchmark_solve.cu.o
 
-CMakeFiles/cuda_base.dir/main_solve.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/cuda_base.dir/main_solve.cu.i"
+CMakeFiles/cuda_base.dir/benchmark_solve.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/cuda_base.dir/benchmark_solve.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/cuda_base.dir/main_solve.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/cuda_base.dir/main_solve.cu.s"
+CMakeFiles/cuda_base.dir/benchmark_solve.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/cuda_base.dir/benchmark_solve.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
 # Object files for target cuda_base
 cuda_base_OBJECTS = \
-"CMakeFiles/cuda_base.dir/main_solve.cu.o"
+"CMakeFiles/cuda_base.dir/benchmark_solve.cu.o"
 
 # External object files for target cuda_base
 cuda_base_EXTERNAL_OBJECTS =
 
-libcuda_base.a: CMakeFiles/cuda_base.dir/main_solve.cu.o
+libcuda_base.a: CMakeFiles/cuda_base.dir/benchmark_solve.cu.o
 libcuda_base.a: CMakeFiles/cuda_base.dir/build.make
 libcuda_base.a: CMakeFiles/cuda_base.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CUDA static library libcuda_base.a"

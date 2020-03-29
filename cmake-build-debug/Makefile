@@ -207,35 +207,35 @@ benchmark.cu.s:
 	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/benchmark.cu.s
 .PHONY : benchmark.cu.s
 
-main_solve.o: main_solve.cu.o
+benchmark_solve.o: benchmark_solve.cu.o
 
-.PHONY : main_solve.o
+.PHONY : benchmark_solve.o
 
 # target to build an object file
-main_solve.cu.o:
-	$(MAKE) -f CMakeFiles/cuda_base.dir/build.make CMakeFiles/cuda_base.dir/main_solve.cu.o
-	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.o
-.PHONY : main_solve.cu.o
+benchmark_solve.cu.o:
+	$(MAKE) -f CMakeFiles/cuda_base.dir/build.make CMakeFiles/cuda_base.dir/benchmark_solve.cu.o
+	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.o
+.PHONY : benchmark_solve.cu.o
 
-main_solve.i: main_solve.cu.i
+benchmark_solve.i: benchmark_solve.cu.i
 
-.PHONY : main_solve.i
+.PHONY : benchmark_solve.i
 
 # target to preprocess a source file
-main_solve.cu.i:
-	$(MAKE) -f CMakeFiles/cuda_base.dir/build.make CMakeFiles/cuda_base.dir/main_solve.cu.i
-	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.i
-.PHONY : main_solve.cu.i
+benchmark_solve.cu.i:
+	$(MAKE) -f CMakeFiles/cuda_base.dir/build.make CMakeFiles/cuda_base.dir/benchmark_solve.cu.i
+	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.i
+.PHONY : benchmark_solve.cu.i
 
-main_solve.s: main_solve.cu.s
+benchmark_solve.s: benchmark_solve.cu.s
 
-.PHONY : main_solve.s
+.PHONY : benchmark_solve.s
 
 # target to generate assembly for a file
-main_solve.cu.s:
-	$(MAKE) -f CMakeFiles/cuda_base.dir/build.make CMakeFiles/cuda_base.dir/main_solve.cu.s
-	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/main_solve.cu.s
-.PHONY : main_solve.cu.s
+benchmark_solve.cu.s:
+	$(MAKE) -f CMakeFiles/cuda_base.dir/build.make CMakeFiles/cuda_base.dir/benchmark_solve.cu.s
+	$(MAKE) -f CMakeFiles/CUDA_Test_Clion.dir/build.make CMakeFiles/CUDA_Test_Clion.dir/benchmark_solve.cu.s
+.PHONY : benchmark_solve.cu.s
 
 parallel_solver.o: parallel_solver.cu.o
 
@@ -280,9 +280,9 @@ help:
 	@echo "... benchmark.o"
 	@echo "... benchmark.i"
 	@echo "... benchmark.s"
-	@echo "... main_solve.o"
-	@echo "... main_solve.i"
-	@echo "... main_solve.s"
+	@echo "... benchmark_solve.o"
+	@echo "... benchmark_solve.i"
+	@echo "... benchmark_solve.s"
 	@echo "... parallel_solver.o"
 	@echo "... parallel_solver.i"
 	@echo "... parallel_solver.s"

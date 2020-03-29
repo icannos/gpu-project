@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CUDA
-  "/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/main_solve.cu" "/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles/cuda_base.dir/main_solve.cu.o"
+  "/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/benchmark_solve.cu" "/run/media/maxime/Documents/_ENS/M2/semestre2/cuda/26.02.2020/gpu-project/cmake-build-debug/CMakeFiles/cuda_base.dir/benchmark_solve.cu.o"
   )
 set(CMAKE_CUDA_COMPILER_ID "NVIDIA")
 

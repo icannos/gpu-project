@@ -1,11 +1,16 @@
 ### GPU project -- LDLT factorization
 
+We divided the project into 2 parts. The first part denoted 'facto' for factorization is dedicated for the LDLt 
+factorization and the second part is dedicated to the solving 'solver' of systems given under the LDLt form.
+
+We therefore provide benchmarks for each part taken individually and for the use of both sequentially.
+
 #### Usages
+
 ```
 ./build/solve d max_number_of_thread
 ./build/solve_benchmark number_of_matrices number_of_matrices d max_number_of_thread
 ./build/fact number_of_matrices d max_number_of_thread | python verify_facto.py --atol 1e-2
-
 ```
 
 #### Structure du projet
@@ -23,7 +28,7 @@
 ├── benchmark_solver.py		// Pyton script which run multiple time the benchmark to make a csv file
 ├── CMakeLists.txt
 ├── compile.sh			// Compile all the needed files
-├── ide_params.h		// Just something to help IDE to work
+├── ide_params.h		// A hack to allow autocompletion with fancy IDE
 ├── LDLt.cu			// The factorization source code
 ├── LDLt.h			// Facto header
 ├── main_solve.cu		// Solve a system and display the result

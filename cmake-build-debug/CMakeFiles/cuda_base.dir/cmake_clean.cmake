@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/cuda_base.dir/main_solve.cu.o"
+  "CMakeFiles/cuda_base.dir/benchmark_solve.cu.o"
   "libcuda_base.a"
   "libcuda_base.pdb"
 )

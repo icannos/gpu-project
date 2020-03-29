@@ -6,7 +6,7 @@ $ ./LDLt | python verify_facto.py --atol 1e-4
 
 '''
 import numpy as np
-from numpy import nan
+from numpy import nan, inf
 from sys import stdin
 import argparse
 import matplotlib.pyplot as plt

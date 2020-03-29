@@ -72,7 +72,7 @@ __device__ int getDPierre(int d, int i)
     // return &T[matrix_id * matrix_memory_size + d_position]
 }
 
-__device__ void parallel_copy(float* dest, float* src, int n)
+__device__ void parallel_copy(float* src, float* dest, int n)
 {
     int i = threadIdx.x;
     int stride = blockDim.x;
@@ -185,13 +185,12 @@ __global__ void LDLt_max_row_k_SHARED(float* A_host, int d)
     int A_size = d*(d+1)/2+d;
     int minTB = blockDim.x/d;
     // printf("minTB %d\n", minTB);
-    int nt = (blockIdx.x*minTB + Qt) * A_size;
+    int nt = Qt * A_size;
     // int gbx = Qt + blockIdx.x*(blockDim.x/d);
 
-    printf("\n thread %d block %d minTB %d", threadIdx.x, blockIdx.x, minTB);
     extern __shared__ float sA[];
     //copy ACPU to sA
-    parallel_copy(A_host, &sA[(blockIdx.x*minTB + Qt)*A_size], minTB*A_size);
+    parallel_copy(&A_host[blockIdx.x*minTB*A_size], sA, minTB*A_size);
 
     // tidx==j
 
@@ -222,7 +221,7 @@ __global__ void LDLt_max_row_k_SHARED(float* A_host, int d)
         __syncthreads();
     }
 
-    parallel_copy(&sA[(blockIdx.x*minTB + Qt)*A_size], A_host, minTB*A_size);
+    parallel_copy(sA, &A_host[blockIdx.x*minTB*A_size], minTB*A_size);
 }
 
 

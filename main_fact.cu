@@ -32,10 +32,15 @@ int main(int argc, char* argv[]) {
     if (argc>4)
       factorizer = atoi(argv[4]);
 
+    if (d>num_thread_per_block)
+      throw std::invalid_argument( "d > num_thread_per_block" );
+    if (factorizer==2 && d>64)
+      throw std::invalid_argument( "d > 64: can not factorize big matrices on shared memory. Please use host memory" );
+    num_thread_per_block = min(64, num_thread_per_block);
+
     // int minTB = 1;  // number of matrix per block
     int minTB = num_thread_per_block/d;  // number of matrix per block
     int NB = (n+minTB-1)/minTB;  // number of blocks (round up)
-    printf("%d %d", minTB, NB);
 
     srand(time(0));
 

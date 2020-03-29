@@ -1,5 +1,6 @@
 \babel@toc {english}{}
 \beamer@sectionintoc {1}{Our project}{2}{0}{1}
-\beamer@sectionintoc {2}{The factorization}{4}{0}{2}
-\beamer@sectionintoc {3}{The solver}{8}{0}{3}
-\beamer@sectionintoc {4}{The full pipeline}{11}{0}{4}
+\beamer@sectionintoc {2}{Data storage}{4}{0}{2}
+\beamer@sectionintoc {3}{The factorization}{6}{0}{3}
+\beamer@sectionintoc {4}{The solver}{10}{0}{4}
+\beamer@sectionintoc {5}{The full pipeline}{13}{0}{5}

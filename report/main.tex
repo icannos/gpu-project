@@ -12,6 +12,9 @@
 
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{amstext} % for \text macro
+\usepackage{array}   % for \newcolumntype macro
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "c" column type
 
 % Possible options of the package (add/remove below in \usetheme call):
 %  - nosectionpages: no pages between sections
@@ -57,6 +60,47 @@
 	\end{exampleblock}
 
 \end{frame}
+
+
+
+\section{Data storage}
+
+\begin{frame}{}
+	Storage of $n$ matrix of size $d*d$
+
+	Matrices $L$ and $D$ :
+	\begin{tabular}{|C|C|C|C||C|C|C|C|C|C||C}
+		\hline
+		D^1_{1,1} & D^1_{2,2} & \dots & D^1_{d,d} & L^1_{1,1} & L^1_{2,1} &
+		\dots & L^1_{d,1} & \dots & L^1_{d,d} & \dots\\
+		\hline
+	\end{tabular}
+	\begin{tabular}{C|C|C|}
+		\hline
+		\dots D^2_{1,1} &  \dots & L^n_{d,d} \\
+		\hline
+	\end{tabular}
+
+	Matrix $A$ :
+	\begin{tabular}{|C|C|C|C||C|C|C|C|C|C||C}
+		\hline
+		A^1_{1,1} & A^1_{2,2} & \dots & A^1_{d,d} & \emptyset & A^1_{2,1} &
+		\dots & A^1_{d,1} & \dots & \emptyset & \dots\\
+		\hline
+	\end{tabular}
+	\begin{tabular}{C|C|C|}
+		\hline
+		\dots A^2_{1,1} &  \dots & \emptyset \\
+		\hline
+	\end{tabular}
+
+	with $M^k_{i,j}$ being the element $(i,j)$ of the $k^{th}$ matrix $M$.
+
+	We choosed to store the diagonal elements of $L$ to simplify our code.
+
+	This confguration allows us to compute the factorization in place.
+\end{frame}
+
 
 \section{The factorization}
 
@@ -116,8 +160,8 @@
 \end{frame}
 
 \begin{frame}{}
-	
-\begin{block}{Behavrio}
+
+\begin{block}{Behavior}
 	We have a gain of time which is linear in the number of threads.
 \end{block}
 	

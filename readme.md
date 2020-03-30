@@ -14,8 +14,7 @@ We therefore provide benchmarks for each part taken individually and for the use
 ```
 
 #### Structure du projet
-'''
-.
+```
 ├── build
 │   ├── full			// Factorize and solve
 │   ├── solve			// Solve the system
@@ -38,4 +37,4 @@ We therefore provide benchmarks for each part taken individually and for the use
 ├── verify_facto.py		// Use python to solve the problem and compare it to the computed solution
 ├── verify_solver.py		// Use python to inverse the system and compare it to the computed solution
 └── verify_solver.sh		// Combine verify_solver.py and main_solver.cu
-'''
+```

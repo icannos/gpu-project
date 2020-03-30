@@ -5,9 +5,18 @@
 // Usage
 // ./build/full N d
 
+//
+// Pierre G 27/03/20.
+//
+
+
+// Usage
+// ./build/fact N d num_thread_per_block
+// ./build/fact N d num_thread_per_block  |  python verify_facto.py --atol 0.01
+
+
 #include "LDLt.h"
 #include "parallel_solver.h"
-
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -18,27 +27,22 @@
 
 int main(int argc, char* argv[]) {
     float Tim;                            // GPU timer instructions
-    cudaEvent_t start, stop, startsolve, stopsolve;            // GPU timer instructions
+    cudaEvent_t start, startsolve, stop, stopsolve;            // GPU timer instructions
     int d = 20;
     int n = 5;
     int num_thread_per_block = 1024;
     int factorizer = 0; // 0: columns || 1: rows || 2: shared memory+row
 
-    n = atoi(argv[1]);
-    d = atoi(argv[2]);
+    n = atoi(argv[1]); // Number of matrices
+    d = atoi(argv[2]); // Number of dimension
     num_thread_per_block = atoi(argv[3]);
     if (argc>4)
         factorizer = atoi(argv[4]);
 
-    if (d>num_thread_per_block)
-      throw std::invalid_argument( "d > num_thread_per_block" );
-    if (factorizer==2 && d>64)
-      throw std::invalid_argument( "d > 64: can not factorize big matrices on shared memory. Please use host memory" );
-    num_thread_per_block = min(64, num_thread_per_block);
-
     // int minTB = 1;  // number of matrix per block
     int minTB = num_thread_per_block/d;  // number of matrix per block
     int NB = (n+minTB-1)/minTB;  // number of blocks (round up)
+    printf("%d %d", minTB, NB);
 
     srand(time(0));
 
@@ -58,6 +62,8 @@ int main(int argc, char* argv[]) {
 
     cudaMemcpy(gpuA, A, sizeof(float) * n * (d + d * (d + 1) / 2), cudaMemcpyHostToDevice);
     // cudaMemcpy(gpuY, Y, sizeof(float) * n * d, cudaMemcpyHostToDevice);
+
+
 
     cudaEventCreate(&start);                // GPU timer instructions
     cudaEventCreate(&stop);                 // GPU timer instructions
@@ -80,13 +86,15 @@ int main(int argc, char* argv[]) {
     cudaEventElapsedTime(&Tim, start, stop);// GPU timer instructions
     cudaEventDestroy(start);                // GPU timer instructions
     cudaEventDestroy(stop);                 // GPU timer instructions
-    printf("Execution time %f ms\n", Tim);  // GPU timer instructions
+    printf("\nExecution time %f ms\n", Tim);  // GPU timer instructions
+
 
 
     cudaMemcpy(LandD, gpuA, sizeof(float) * n * (d + d * (d + 1) / 2), cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     // cudaMemcpy(X, gpuY, sizeof(float) * n * d, cudaMemcpyDeviceToHost);
     // cudaDeviceSynchronize();
+
 
     Tim = 0;
 
@@ -103,17 +111,6 @@ int main(int argc, char* argv[]) {
     cudaEventDestroy(stopsolve);                 // GPU timer instructions
 
     printf("Solving time %f ms\n", Tim);  // GPU timer instructions
-
-
-
-
-    cudaFree(gpuA);
-    cudaFree(gpuY);
-    free(A);
-    free(LandD);
-    free(Y);
-    // free(Ychap);
-    // free(X);
 
     return 0;
 }

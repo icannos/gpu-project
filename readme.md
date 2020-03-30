@@ -6,11 +6,17 @@ factorization and the second part is dedicated to the solving 'solver' of system
 We therefore provide benchmarks for each part taken individually and for the use of both sequentially.
 
 #### Usages
+To compile all the targets:
+```
+./compile.sh
+```
 
 ```
 ./build/solve d max_number_of_thread
 ./build/solve_benchmark number_of_matrices number_of_matrices d max_number_of_thread
 ./build/fact number_of_matrices d max_number_of_thread | python verify_facto.py --atol 1e-2
+./build/full number_of_matrices d max_number_of_thread
+./verify_solver
 ```
 
 #### Structure du projet
